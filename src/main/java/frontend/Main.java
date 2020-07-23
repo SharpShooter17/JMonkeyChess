@@ -1,6 +1,9 @@
 package frontend;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.input.KeyInput;
+import com.jme3.input.controls.AnalogListener;
+import com.jme3.input.controls.KeyTrigger;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
 import com.jme3.light.PointLight;
@@ -12,6 +15,8 @@ import com.jme3.shadow.EdgeFilteringMode;
 import com.jme3.shadow.PointLightShadowRenderer;
 
 public class Main extends SimpleApplication {
+
+    private Board board;
 
     public static void main(String[] args) {
         Main app = new Main();
@@ -58,11 +63,31 @@ public class Main extends SimpleApplication {
 
         Models models = new Models(assetManager);
         models.loadModels();
-        Board board = new Board(models);
+        board = new Board(models);
 
         rootNode.attachChild(models.chessBoard);
         board.getBoard().forEach(rootNode::attachChild);
 
         rootNode.setShadowMode(RenderQueue.ShadowMode.CastAndReceive);
+
+        initKeys();
     }
+
+    private void initKeys() {
+        inputManager.addMapping("Up", new KeyTrigger(KeyInput.KEY_I));
+        inputManager.addMapping("Right", new KeyTrigger(KeyInput.KEY_L));
+        inputManager.addMapping("Left", new KeyTrigger(KeyInput.KEY_J));
+        inputManager.addMapping("Down", new KeyTrigger(KeyInput.KEY_K));
+        inputManager.addMapping("Select", new KeyTrigger(KeyInput.KEY_SPACE));
+        inputManager.addListener(analogListener, "Left", "Right", "Up", "Down", "Space");
+    }
+
+    private final AnalogListener analogListener = new AnalogListener() {
+        @Override
+        public void onAnalog(String name, float value, float tpf) {
+            if (name.equals("Right")) {
+                board.selectNext();
+            }
+        }
+    };
 }
