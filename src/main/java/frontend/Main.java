@@ -34,7 +34,7 @@ public class Main extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
-        cam.setLocation(new Vector3f(0, 40, 50));
+        cam.setLocation(new Vector3f(0, 0, 30));
         cam.lookAt(new Vector3f(0, 0, 0), new Vector3f(0, 1, 0));
         lights();
 

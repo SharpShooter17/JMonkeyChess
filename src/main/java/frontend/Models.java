@@ -98,26 +98,31 @@ public class Models {
 
     private void loadRook() {
         rook = (Geometry) assetManager.loadModel("assets/Models/Rook/Rook.obj");
+        rook.move(0, -0.1f, 0);
         rook.scale(100f);
     }
 
     private void loadKnight() {
         knight = (Geometry) assetManager.loadModel("assets/Models/Knight/Knight.obj");
+        knight.move(0, 0.2f, 0);
         knight.scale(100f);
     }
 
     private void loadBishop() {
         bishop = (Geometry) assetManager.loadModel("assets/Models/Bishop/Bishop.obj");
+        bishop.move(0, 0.25f, 0);
         bishop.scale(100f);
     }
 
     private void loadKing() {
         king = (Geometry) assetManager.loadModel("assets/Models/King/King.obj");
+        king.move(0, 0.8f, 0);
         king.scale(100f);
     }
 
     private void loadQueen() {
         queen = (Geometry) assetManager.loadModel("assets/Models/Queen/Queen.obj");
+        queen.move(0, 0.8f, 0);
         queen.scale(100f);
     }
 
