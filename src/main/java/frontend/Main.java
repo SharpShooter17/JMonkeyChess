@@ -6,6 +6,10 @@ import com.jme3.light.DirectionalLight;
 import com.jme3.light.PointLight;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
+import com.jme3.renderer.queue.RenderQueue;
+import com.jme3.shadow.DirectionalLightShadowRenderer;
+import com.jme3.shadow.EdgeFilteringMode;
+import com.jme3.shadow.PointLightShadowRenderer;
 
 public class Main extends SimpleApplication {
 
@@ -26,15 +30,29 @@ public class Main extends SimpleApplication {
         lamp.setColor(ColorRGBA.Yellow.mult(0.8f));
         rootNode.addLight(lamp);
 
+        final int SHADOWMAP_SIZE = 1024;
+        PointLightShadowRenderer pointLightShadowRenderer = new PointLightShadowRenderer(assetManager, SHADOWMAP_SIZE);
+        pointLightShadowRenderer.setEdgeFilteringMode(EdgeFilteringMode.Bilinear);
+        pointLightShadowRenderer.setLight(lamp);
+        viewPort.addProcessor(pointLightShadowRenderer);
+
         DirectionalLight sun = new DirectionalLight();
-        sun.setDirection(new Vector3f(-30, -100, -20));
-        sun.setColor(ColorRGBA.White.mult(0.1f));
+        sun.setDirection(new Vector3f(-30, -100, -60));
+        sun.setColor(ColorRGBA.White.mult(0.8f));
         rootNode.addLight(sun);
+
+        DirectionalLightShadowRenderer dlsr = new DirectionalLightShadowRenderer(assetManager, SHADOWMAP_SIZE, 3);
+        dlsr.setEdgeFilteringMode(EdgeFilteringMode.Bilinear);
+        dlsr.setLight(sun);
+        viewPort.addProcessor(dlsr);
     }
 
     @Override
     public void simpleInitApp() {
-        cam.setLocation(new Vector3f(0, 0, 30));
+        setShowSettings(false);
+        flyCam.setMoveSpeed(10.0f);
+
+        cam.setLocation(new Vector3f(-50, 40, 0.1f));
         cam.lookAt(new Vector3f(0, 0, 0), new Vector3f(0, 1, 0));
         lights();
 
@@ -44,5 +62,7 @@ public class Main extends SimpleApplication {
 
         rootNode.attachChild(models.chessBoard);
         board.getBoard().forEach(rootNode::attachChild);
+
+        rootNode.setShadowMode(RenderQueue.ShadowMode.CastAndReceive);
     }
 }

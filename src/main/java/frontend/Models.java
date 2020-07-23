@@ -70,13 +70,13 @@ public class Models {
 
     private Geometry makeBlack(Geometry piece) {
         Geometry black = piece.clone();
-        setDiffuse(black, new Vector4f(0, 0, 0, 1));
+        setDiffuse(black, new Vector4f(0, 0, 1, 1));
         return black;
     }
 
     private Geometry makeWhite(Geometry piece) {
         Geometry white = piece.clone();
-        setDiffuse(piece, new Vector4f(1, 1, 1, 1));
+        setDiffuse(piece, new Vector4f(1, 0, 0, 1));
         return white;
     }
 

@@ -51,11 +51,11 @@ public class Board {
         initializeDoubleFigure(-8.0f, -19.0f, models.blackBishop());
         initializeDoubleFigure(8.0f, 19.0f, models.whiteBishop());
 
-        initializeFigure(-2.5f, -19.0f, models.blackQueen());
-        initializeFigure(-2.5f, 19.0f, models.whiteQueen());
+        initializeFigure(-2.7f, -19.0f, models.blackQueen());
+        initializeFigure(-2.7f, 19.0f, models.whiteQueen());
 
-        initializeFigure(2.5f, -19.0f, models.blackKing());
-        initializeFigure(2.5f, 19.0f, models.whiteKing());
+        initializeFigure(2.7f, -19.0f, models.blackKing());
+        initializeFigure(2.7f, 19.0f, models.whiteKing());
     }
 
     public Collection<Geometry> getBoard() {
