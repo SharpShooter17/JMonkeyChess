@@ -1,6 +1,6 @@
 # Blender v2.83.3 OBJ File: 'uploads_files_2251716_LowPolyChess — kopia — kopia.blend'
 # www.blender.org
-mtllib King.mtl
+mtllib Rook.mtl
 o Rook_Cylinder.001
 v 0.000000 -0.000063 -0.020849
 v 0.000000 0.007691 -0.019352

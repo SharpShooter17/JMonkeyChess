@@ -21,15 +21,63 @@ public class Models {
     }
 
     public Geometry blackPawn() {
-        Geometry blackPawn = pawn.clone();
-        setDiffuse(blackPawn, new Vector4f(0, 0, 0, 1));
-        return blackPawn;
+        return makeBlack(pawn);
     }
 
     public Geometry whitePawn() {
-        Geometry whitePawn = pawn.clone();
-        setDiffuse(whitePawn, new Vector4f(1, 1, 1, 1));
-        return whitePawn;
+        return makeWhite(pawn);
+    }
+
+    public Geometry blackRook() {
+        return makeBlack(rook);
+    }
+
+    public Geometry whiteRook() {
+        return makeWhite(rook);
+    }
+
+    public Geometry blackKnight() {
+        return makeBlack(knight);
+    }
+
+    public Geometry whiteKnight() {
+        return makeWhite(knight);
+    }
+
+    public Geometry blackBishop() {
+        return makeBlack(bishop);
+    }
+
+    public Geometry whiteBishop() {
+        return makeWhite(bishop);
+    }
+
+    public Geometry blackKing() {
+        return makeBlack(king);
+    }
+
+    public Geometry whiteKing() {
+        return makeWhite(king);
+    }
+
+    public Geometry blackQueen() {
+        return makeBlack(queen);
+    }
+
+    public Geometry whiteQueen() {
+        return makeWhite(queen);
+    }
+
+    private Geometry makeBlack(Geometry piece) {
+        Geometry black = piece.clone();
+        setDiffuse(black, new Vector4f(0, 0, 0, 1));
+        return black;
+    }
+
+    private Geometry makeWhite(Geometry piece) {
+        Geometry white = piece.clone();
+        setDiffuse(piece, new Vector4f(1, 1, 1, 1));
+        return white;
     }
 
     private void setDiffuse(Geometry geometry, Vector4f color) {
