@@ -13,6 +13,7 @@ public class Board {
     private final Vector4f defaultAmbient = new Vector4f(0.23333f, 0.23333f, 0.23333f, 1.0f);
     private final Vector4f selectedAmbient = new Vector4f(0.0f, 1.0f, 0.0f, 1.0f);
 
+    private boolean isSelected = false;
     private int selectedPiece;
     private final Models models;
     private final List<Geometry> board = new ArrayList<>();
@@ -30,6 +31,14 @@ public class Board {
             selectedPiece = -1;
         }
         setAmbient(board.get(++selectedPiece), selectedAmbient);
+    }
+
+    public void selectPrevious() {
+        setAmbient(board.get(selectedPiece), defaultAmbient);
+        if (selectedPiece - 1 < 0) {
+            selectedPiece = board.size();
+        }
+        setAmbient(board.get(--selectedPiece), selectedAmbient);
     }
 
     private void setAmbient(Geometry geometry, Vector4f ambient) {
@@ -76,5 +85,9 @@ public class Board {
 
     public Collection<Geometry> getBoard() {
         return board;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
     }
 }

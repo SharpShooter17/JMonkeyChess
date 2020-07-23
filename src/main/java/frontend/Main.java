@@ -86,7 +86,14 @@ public class Main extends SimpleApplication {
         @Override
         public void onAnalog(String name, float value, float tpf) {
             if (name.equals("Right")) {
-                board.selectNext();
+                if (!board.isSelected()) {
+                    board.selectNext();
+                }
+            }
+            if (name.equals("Left")) {
+                if (!board.isSelected()) {
+                    board.selectPrevious();
+                }
             }
         }
     };
