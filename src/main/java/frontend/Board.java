@@ -83,6 +83,30 @@ public class Board {
         initializeFigure(2.7f, -19.0f, models.blackKing());
     }
 
+    public void moveRight() {
+        move(1, 0);
+    }
+
+    public void moveLeft() {
+        move(-1 ,0);
+    }
+
+    public void moveUp() {
+        move(0, 1);
+    }
+
+    public void moveDown() {
+        move(0, -1);
+    }
+
+    private void move(int x, int z) {
+        board.get(selectedPiece).move(new Vector3f(x * 5.5f, 0.0f, z * 5.5f));
+    }
+
+    public void toggleSelect() {
+        this.isSelected = !this.isSelected;
+    }
+
     public Collection<Geometry> getBoard() {
         return board;
     }

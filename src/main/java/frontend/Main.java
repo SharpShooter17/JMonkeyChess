@@ -2,7 +2,7 @@ package frontend;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.input.KeyInput;
-import com.jme3.input.controls.AnalogListener;
+import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
@@ -57,7 +57,7 @@ public class Main extends SimpleApplication {
         setShowSettings(false);
         flyCam.setMoveSpeed(10.0f);
 
-        cam.setLocation(new Vector3f(-50, 40, 0.1f));
+        cam.setLocation(new Vector3f(0, 40, 50.0f));
         cam.lookAt(new Vector3f(0, 0, 0), new Vector3f(0, 1, 0));
         lights();
 
@@ -78,22 +78,35 @@ public class Main extends SimpleApplication {
         inputManager.addMapping("Right", new KeyTrigger(KeyInput.KEY_L));
         inputManager.addMapping("Left", new KeyTrigger(KeyInput.KEY_J));
         inputManager.addMapping("Down", new KeyTrigger(KeyInput.KEY_K));
-        inputManager.addMapping("Select", new KeyTrigger(KeyInput.KEY_SPACE));
+        inputManager.addMapping("Space", new KeyTrigger(KeyInput.KEY_SPACE));
         inputManager.addListener(analogListener, "Left", "Right", "Up", "Down", "Space");
     }
 
-    private final AnalogListener analogListener = new AnalogListener() {
+    private final ActionListener analogListener = new ActionListener() {
         @Override
-        public void onAnalog(String name, float value, float tpf) {
-            if (name.equals("Right")) {
+        public void onAction(String name, boolean isPressed, float tpf) {
+            if (name.equals("Right") && isPressed) {
                 if (!board.isSelected()) {
                     board.selectNext();
+                } else {
+                    board.moveRight();
                 }
             }
-            if (name.equals("Left")) {
+            if (name.equals("Left") && isPressed) {
                 if (!board.isSelected()) {
                     board.selectPrevious();
+                } else {
+                    board.moveLeft();
                 }
+            }
+            if (name.equals("Up") && isPressed && board.isSelected()) {
+                board.moveUp();
+            }
+            if (name.equals("Down") && isPressed && board.isSelected()) {
+                board.moveDown();
+            }
+            if (name.equals("Space") && isPressed) {
+                board.toggleSelect();
             }
         }
     };
